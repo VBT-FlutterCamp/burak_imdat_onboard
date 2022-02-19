@@ -14,6 +14,8 @@ class OnboardView extends StatefulWidget {
 class _OnboardViewState extends State<OnboardView> {
   late final PageController pageController;
   int _currentIndex = 0;
+  final int _animationMS = 10;
+  final double _pageControllerRadius = 10;
   @override
   void initState() {
     super.initState();
@@ -98,7 +100,7 @@ class _OnboardViewState extends State<OnboardView> {
         primary: Colors.grey.shade200,
       ),
       onPressed: () {
-        pageController.animateToPage(OnboardModel.dummyList.length - 1, duration: const Duration(milliseconds: 10), curve: Curves.bounceIn);
+        pageController.animateToPage(OnboardModel.dummyList.length - 1, duration: Duration(milliseconds: _animationMS), curve: Curves.bounceIn);
       },
     );
   }
@@ -113,7 +115,7 @@ class _OnboardViewState extends State<OnboardView> {
         if (_currentIndex == OnboardModel.dummyList.length - 1) {
           return;
         }
-        pageController.animateToPage(_currentIndex + 1, duration: const Duration(milliseconds: 10), curve: Curves.bounceIn);
+        pageController.animateToPage(_currentIndex + 1, duration: Duration(milliseconds: _animationMS), curve: Curves.bounceIn);
         _currentIndex += 1;
         setState(() {});
       },
@@ -144,7 +146,7 @@ class _OnboardViewState extends State<OnboardView> {
     return Padding(
       padding: context.horizontalPaddingLow,
       child: CircleAvatar(
-        radius: 10,
+        radius: _pageControllerRadius,
         backgroundColor: _currentIndex == index ? const Color.fromARGB(255, 86, 40, 172) : Colors.grey,
       ),
     );
